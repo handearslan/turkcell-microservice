@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ProductsController {
     private final ProductService productService;
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CreatedProductResponse add(@RequestBody CreateProductRequest request){
@@ -23,5 +22,10 @@ public class ProductsController {
     public Boolean getByInventoryCode(@RequestParam String invCode,
                                       @RequestParam int requiredStock){
         return productService.getByInventoryCode(invCode, requiredStock);
+    }
+
+    @GetMapping("get-stock")
+    public int getByStock(@RequestParam String invCode){
+        return productService.getByStock(invCode);
     }
 }

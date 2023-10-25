@@ -7,8 +7,6 @@ import com.turkcell.productservice.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -49,5 +47,10 @@ public class ProductManager implements ProductService{
             return false;
         return true;
     }
-}
 
+    @Override
+    public Integer getByStock(String code) {
+        Product product = productRepository.findByInventoryCodeQuery(code);
+        return product.getStock();
+    }
+}

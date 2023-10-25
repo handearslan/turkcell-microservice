@@ -1,21 +1,21 @@
 package com.turkcell.orderservice.business.concretes;
 
 import com.turkcell.orderservice.business.abstracts.OrderService;
-import com.turkcell.orderservice.dtos.response.CreatedGetOrderResponse;
+import com.turkcell.orderservice.entities.Order;
 import com.turkcell.orderservice.repositories.OrderRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class OrderManager implements OrderService {
+@Service
+@RequiredArgsConstructor
+public class OrderManager implements OrderService  {
 
     private final OrderRepository orderRepository;
 
-    public OrderManager( OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
-
-    @Override
-    public List<CreatedGetOrderResponse> getAll() {
+   @Override
+    public List<Order> getAll() {
         return orderRepository.getForListing();
     }
 }
