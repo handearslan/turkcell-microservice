@@ -28,7 +28,7 @@ public class OrdersController {
         // sync
         Boolean hasStock = webClientBuilder.build()
                 .get()
-                .uri("http://localhost:8083/api/v1/products/check-stock",
+                .uri("http://product-service/api/v1/products/check-stock",
                         (uriBuilder) -> uriBuilder
                                 .queryParam("invCode",request.getInventoryCode())
                                 .queryParam("requiredStock",request.getAmount())
@@ -48,7 +48,7 @@ public class OrdersController {
         for (CreateOrderRequest item : request) {
             Boolean hasStock = webClientBuilder.build()
                     .get()
-                    .uri("http://localhost:8083/api/v1/products/check-stock",
+                    .uri("http://product-service/api/v1/products/check-stock",
                             (uriBuilder) -> uriBuilder
                                     .queryParam("invCode",item.getInventoryCode())
                                     .queryParam("requiredStock",item.getAmount())
@@ -59,7 +59,7 @@ public class OrdersController {
 
             Integer aa = webClientBuilder.build()
                     .get()
-                    .uri("http://localhost:8083/api/v1/products/get-stock",
+                    .uri("http://product-service/api/v1/products/get-stock",
                             (uriBuilder) -> uriBuilder
                                     .queryParam("invCode",item.getInventoryCode())
                                     .build())
