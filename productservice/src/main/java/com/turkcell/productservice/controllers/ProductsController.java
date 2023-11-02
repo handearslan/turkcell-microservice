@@ -28,4 +28,10 @@ public class ProductsController {
     public int getByStock(@RequestParam String invCode){
         return productService.getByStock(invCode);
     }
+
+    @GetMapping("deneme")
+    public String deneme(){
+        return "Deneme";
+    }
+
 }
