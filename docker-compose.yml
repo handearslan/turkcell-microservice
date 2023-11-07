@@ -1,0 +1,37 @@
+services:
+  discovery-service:
+    image: halefbudanur/discovery-server
+    ports:
+      - 8761:8761
+    mem_limit: 700m
+    depends_on:
+      - keycloak
+      #- postgreeSQL
+  keycloak:
+    image: quay.io/keycloak/keycloak
+    ports:
+      - 8080:8080
+    mem_limit: 700m
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command:
+      - start-dev
+  orderservice:
+    image: halefbudanur/orderservice
+    ports:
+      - 8085:8085
+    mem_limit: 700m
+    depends_on:
+      - postgresql
+  postgresql:
+    image: postgres
+    ports:
+      - 5432:5432
+    mem_limit: 700m
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: order-service
+
+
