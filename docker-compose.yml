@@ -21,11 +21,15 @@ services:
     ports:
       - 8081:8081
     mem_limit: 700m
+    depends_on:
+      - postgres
   productservice:
     image: halefbudanur/productservice
     ports:
       - 8082:8082
     mem_limit: 700m
+    depends_on:
+      - mongo
   postgres:
     container_name: postgres_container
     image: postgres:latest
@@ -74,7 +78,7 @@ services:
         ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 networks:
   postgres:
-    driver:
+    driver: bridge
 
 volumes:
   postgres:
