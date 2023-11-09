@@ -9,13 +9,18 @@ services:
   keycloak:
     image: quay.io/keycloak/keycloak
     ports:
-      - 8080:8080
+      - 8083:8083
     mem_limit: 700m
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
     command:
       - start-dev
+  api-gateway:
+    image: halefbudanur/api-gateway
+    ports:
+      - 8080:8080
+    mem_limit: 700m
   orderservice:
     image: halefbudanur/orderservice
     ports:
@@ -63,19 +68,12 @@ services:
   mongo:
     image: mongo
     restart: always
+    ports:
+      - 8084:8084
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
 
-    mongo-express:
-      image: mongo-express
-      restart: always
-      ports:
-        - 8081:8081
-      environment:
-        ME_CONFIG_MONGODB_ADMINUSERNAME: root
-        ME_CONFIG_MONGODB_ADMINPASSWORD: example
-        ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 networks:
   postgres:
     driver: bridge
