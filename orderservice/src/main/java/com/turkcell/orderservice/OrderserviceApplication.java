@@ -9,6 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class OrderserviceApplication {
 
 	public static void main(String[] args) {
+			System.out.println("b");
 		SpringApplication.run(OrderserviceApplication.class, args);
 	}
 
