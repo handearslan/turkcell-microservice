@@ -16,34 +16,13 @@ import java.util.List;
 public class OrderManager implements OrderService  {
 
     private final OrderRepository orderRepository;
-    private CircuitBreaker circuitBreaker;
 
     @Override
     public List<Order> getAll() {
         return orderRepository.getForListing();
     }
 
-        private void simulateServiceCall() {
-            // Servis çağrısını temsil eden bir metot
-            // Bu örnekte sadece hata fırlatıyormuş gibi düşünelim
-            throw new RuntimeException("Servis çağrısı başarısız oldu");
-        }
-
-        public void simulateTransitionToOpenState() {
-            // Circuit Breaker'ı manuel olarak açık duruma geçirme simülasyonu
-            circuitBreaker.transitionToOpenState();
-        }
-
-        public void simulateTransitionToHalfOpenState() {
-            // Circuit Breaker'ı manuel olarak yarı açık duruma geçirme simülasyonu
-            circuitBreaker.transitionToHalfOpenState();
-        }
-
-        public void simulateTransitionToClosedState() {
-            // Circuit Breaker'ı manuel olarak kapalı duruma geçirme simülasyonu
-            circuitBreaker.transitionToClosedState();
-        }
-    }
+}
 
 
 

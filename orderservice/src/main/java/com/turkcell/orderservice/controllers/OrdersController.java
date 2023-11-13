@@ -3,6 +3,7 @@ package com.turkcell.orderservice.controllers;
 import com.turkcell.orderservice.business.abstracts.OrderService;
 import com.turkcell.orderservice.dtos.request.CreateOrderRequest;
 import com.turkcell.orderservice.dtos.response.CreatedOrderResponse;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
+
 
 @RequestMapping("api/v1/orders")
 @RestController
@@ -21,6 +25,8 @@ public class OrdersController {
 
     private final WebClient.Builder webClientBuilder;
 
+    @CircuitBreaker(name = "submitOrderCircuitBreaker",
+            fallbackMethod = "submitOrderCircuitBreakerFallback")
     @PostMapping
     public ResponseEntity<Boolean> submitOrder(@RequestBody CreateOrderRequest request)
     {
@@ -81,5 +87,10 @@ public class OrdersController {
         //return new ResponseEntity<>(returnList, returnList ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
 
         return returnList;
+    }
+
+    private ResponseEntity<Boolean> getCustomerCircuitBreakerFallback(String param, Exception e) {
+        System.out.println("Circuit breaker fallback method");
+        return new ResponseEntity<Boolean>(HttpStatus.OK);
     }
 }
