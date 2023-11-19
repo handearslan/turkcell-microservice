@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class CircuitBreakerConfig {
+
     @Bean
     public CircuitBreaker circuitBreaker() {
         return CircuitBreaker.ofDefaults("myCircuitBreakerName");

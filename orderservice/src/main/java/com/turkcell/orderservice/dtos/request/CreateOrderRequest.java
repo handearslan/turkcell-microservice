@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CreateOrderRequest {
+
     private String inventoryCode;
     private Integer amount;
 }

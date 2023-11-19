@@ -13,9 +13,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
 @RequestMapping("api/v1/orders")
 @RestController
 @RequiredArgsConstructor
@@ -28,16 +25,15 @@ public class OrdersController {
     @CircuitBreaker(name = "submitOrderCircuitBreaker",
             fallbackMethod = "submitOrderCircuitBreakerFallback")
     @PostMapping
-    public ResponseEntity<Boolean> submitOrder(@RequestBody CreateOrderRequest request)
-    {
+    public ResponseEntity<Boolean> submitOrder(@RequestBody CreateOrderRequest request) {
         // Web istekleri default async
         // sync
         Boolean hasStock = webClientBuilder.build()
                 .get()
                 .uri("http://product-service/api/v1/products/check-stock",
                         (uriBuilder) -> uriBuilder
-                                .queryParam("invCode",request.getInventoryCode())
-                                .queryParam("requiredStock",request.getAmount())
+                                .queryParam("invCode", request.getInventoryCode())
+                                .queryParam("requiredStock", request.getAmount())
                                 .build())
                 .retrieve()
                 .bodyToMono(Boolean.class)
@@ -47,8 +43,7 @@ public class OrdersController {
     }
 
     @PostMapping("add")
-    public List<CreatedOrderResponse> submitOrderAndStock(@RequestBody List<CreateOrderRequest> request)
-    {
+    public List<CreatedOrderResponse> submitOrderAndStock(@RequestBody List<CreateOrderRequest> request) {
         List<CreatedOrderResponse> returnList = new ArrayList<>();
 
         for (CreateOrderRequest item : request) {
@@ -56,8 +51,8 @@ public class OrdersController {
                     .get()
                     .uri("http://product-service/api/v1/products/check-stock",
                             (uriBuilder) -> uriBuilder
-                                    .queryParam("invCode",item.getInventoryCode())
-                                    .queryParam("requiredStock",item.getAmount())
+                                    .queryParam("invCode", item.getInventoryCode())
+                                    .queryParam("requiredStock", item.getAmount())
                                     .build())
                     .retrieve()
                     .bodyToMono(Boolean.class)
@@ -67,7 +62,7 @@ public class OrdersController {
                     .get()
                     .uri("http://product-service/api/v1/products/get-stock",
                             (uriBuilder) -> uriBuilder
-                                    .queryParam("invCode",item.getInventoryCode())
+                                    .queryParam("invCode", item.getInventoryCode())
                                     .build())
                     .retrieve()
                     .bodyToMono(Integer.class)

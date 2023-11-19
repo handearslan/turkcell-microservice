@@ -10,8 +10,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreatedOrderResponse {
+
     private String inventoryCode;
     private String hasStock;
     private Integer stockAmount;
-
 }

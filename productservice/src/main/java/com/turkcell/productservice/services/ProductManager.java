@@ -7,10 +7,9 @@ import com.turkcell.productservice.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-
 @Service
 @RequiredArgsConstructor
-public class ProductManager implements ProductService{
+public class ProductManager implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
@@ -43,7 +42,7 @@ public class ProductManager implements ProductService{
                 .filter((p) -> p.getInventoryCode().equals(code))
                 .findFirst(); */
         Product product = productRepository.findByInventoryCodeQuery(code);
-        if(product==null || product.getStock() < requiredStock)
+        if (product == null || product.getStock() < requiredStock)
             return false;
         return true;
     }

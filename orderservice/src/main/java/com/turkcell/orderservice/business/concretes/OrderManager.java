@@ -1,4 +1,5 @@
 package com.turkcell.orderservice.business.concretes;
+
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 
 import java.time.Duration;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class OrderManager implements OrderService  {
+public class OrderManager implements OrderService {
 
     private final OrderRepository orderRepository;
 
