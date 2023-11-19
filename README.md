@@ -1,3 +1,2 @@
 # turkcell-microservice
-## <p align="center"> Pair 4:Elif Nida Karakaş,Halef Budanur,Ahmet Çetiner,Baran Büyük,Hande Arslan,Yavuz Selim Özbey, Fuat Hüriyetoğlu
- </p> 
+#Pair4 #Hande Arslan #Halef Budanur #Fuat Hüriyetoğlu #Baran Büyük #Ahmet Çetiner #Elif Nida Karakaş #Yavuz Selim Özbey
